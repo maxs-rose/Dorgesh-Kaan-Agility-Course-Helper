@@ -6,10 +6,10 @@ import net.runelite.api.Client;
 import net.runelite.api.events.MenuOptionClicked;
 import net.runelite.api.events.WidgetLoaded;
 import net.runelite.api.gameval.InterfaceID;
+import net.runelite.api.widgets.JavaScriptCallback;
 import net.runelite.api.widgets.Widget;
 import net.runelite.client.callback.ClientThread;
 import net.runelite.client.eventbus.Subscribe;
-import net.runelite.client.util.Text;
 import uk.zadoss.dorgesh.agility.models.GameObject;
 
 import javax.inject.Inject;
@@ -77,8 +77,8 @@ public final class WidgetHighlighter {
 	}
 	
 	private void highlightOption(Widget widget) {
-		var plainText = Text.removeTags(widget.getText());
-		widget.setText(String.format("(%s) %s", widget.getIndex(), plainText));
+		widget.setText(String.format("[%s] %s", widget.getIndex(), widget.getText()));
 		widget.setTextColor(config.textHighlightColour().getRGB());
+		widget.setOnMouseLeaveListener((JavaScriptCallback)ev -> widget.setTextColor(config.textHighlightColour().getRGB()));
 	}
 }
