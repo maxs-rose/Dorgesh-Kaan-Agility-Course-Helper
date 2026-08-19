@@ -50,6 +50,7 @@ public final class DorgeshKaanAgility extends Plugin {
 		eventBus.register(boilerOverlay);
 		eventBus.register(partHighlighter);
 		eventBus.register(requestWatcher);
+		eventBus.register(turgallOverlay);
 		overlayManager.add(turgallOverlay);
 		overlayManager.add(consoleOverlay);
 		overlayManager.add(boilerOverlay);
@@ -64,6 +65,7 @@ public final class DorgeshKaanAgility extends Plugin {
 		overlayManager.remove(consoleOverlay);
 		overlayManager.remove(boilerOverlay);
 		eventBus.unregister(requestWatcher);
+		eventBus.unregister(turgallOverlay);
 		eventBus.unregister(consoleOverlay);
 		eventBus.unregister(boilerOverlay);
 		eventBus.unregister(partHighlighter);

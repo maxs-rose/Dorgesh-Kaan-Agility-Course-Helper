@@ -2,6 +2,10 @@ package uk.zadoss.dorgesh.agility.overlays;
 
 import lombok.extern.slf4j.Slf4j;
 import net.runelite.api.Client;
+import net.runelite.api.NPC;
+import net.runelite.api.events.NpcDespawned;
+import net.runelite.api.events.NpcSpawned;
+import net.runelite.client.eventbus.Subscribe;
 import net.runelite.client.ui.overlay.Overlay;
 import net.runelite.client.ui.overlay.OverlayLayer;
 import net.runelite.client.ui.overlay.OverlayPosition;
@@ -13,6 +17,7 @@ import uk.zadoss.dorgesh.agility.models.GameObject;
 import javax.inject.Inject;
 
 import java.awt.*;
+import java.util.Optional;
 
 @Slf4j
 public final class TurgallOverlay extends Overlay {
@@ -20,14 +25,39 @@ public final class TurgallOverlay extends Overlay {
 	private final DorgeshKaanAgilityConfig config;
 	private final CourseState state;
 	
+	private Optional<NPC> turgall = Optional.empty();
+	
 	@Inject
 	public TurgallOverlay(Client client, DorgeshKaanAgilityConfig config, CourseState state) {
 		this.client = client;
 		this.config = config;
 		this.state = state;
+		turgall = Optional.empty();
 		
 		setLayer(OverlayLayer.ALWAYS_ON_TOP);
 		setPosition(OverlayPosition.DYNAMIC);
+	}
+	
+	@Subscribe
+	@SuppressWarnings("unused")
+	public void onNpcSpawned(NpcSpawned event) {
+		var npc = event.getNpc();
+		
+		if (npc.getId() != GameObject.Turgall.getId())
+			return;
+		
+		turgall = Optional.of(npc);
+	}
+	
+	@Subscribe
+	@SuppressWarnings("unused")
+	public void onNpcDespawned(NpcDespawned event) {
+		var npc = event.getNpc();
+		
+		if (npc.getId() != GameObject.Turgall.getId())
+			return;
+		
+		turgall = Optional.empty();
 	}
 	
 	@Override
@@ -35,11 +65,12 @@ public final class TurgallOverlay extends Overlay {
 		if (!config.highlightTurgall() || !state.isOnCourse())
 			return null;
 		
-		client.getLocalPlayer().getWorldView().npcs()
-				.stream()
-				.filter(npc -> npc.getId() == GameObject.Turgall.getId())
-				.findFirst()
-				.ifPresent(npc -> OverlayUtil.renderPolygon(graphics, npc.getConvexHull(), config.turgallColour()));
+		turgall.ifPresent(t -> {
+			if (t.getConvexHull() == null)
+				return;
+			
+			OverlayUtil.renderPolygon(graphics, t.getConvexHull(), config.turgallColour());
+		});
 		
 		return null;
 	}

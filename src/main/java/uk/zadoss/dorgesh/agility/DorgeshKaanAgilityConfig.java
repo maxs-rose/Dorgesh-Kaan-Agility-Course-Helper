@@ -12,16 +12,18 @@ public interface DorgeshKaanAgilityConfig extends Config {
 	@ConfigItem(
 			keyName = "highlightTurgall",
 			name = "Highlight Turgall",
-			description = "Highlights Turgall"
+			description = "Highlights Turgall",
+			position = 0
 	)
 	default boolean highlightTurgall() {
-		return false;
+		return true;
 	}
 	
 	@ConfigItem(
 			keyName = "turgallColour",
 			name = "Turgall Highlight",
-			description = "Colour to highlight Turgall with"
+			description = "Colour to highlight Turgall with",
+			position = 1
 	)
 	default Color turgallColour() {
 		return Color.GREEN;
@@ -30,16 +32,18 @@ public interface DorgeshKaanAgilityConfig extends Config {
 	@ConfigItem(
 			keyName = "highlightComponent",
 			name = "Highlight Component",
-			description = "Highlights the currently requested components"
+			description = "Highlights the currently requested components",
+			position = 2
 	)
 	default boolean highlightComponent() {
-		return true;
+		return false;
 	}
 	
 	@ConfigItem(
 			keyName = "componentColour",
 			name = "Component Highlight",
-			description = "Colour to highlight correct component with"
+			description = "Colour to highlight correct component with",
+			position = 3
 	)
 	default Color componentColour() {
 		return Color.CYAN;
@@ -48,7 +52,8 @@ public interface DorgeshKaanAgilityConfig extends Config {
 	@ConfigItem(
 			keyName = "textColour",
 			name = "Text Colour",
-			description = "Colour to highlight correct component text with"
+			description = "Colour to highlight correct component text with",
+			position = 4
 	)
 	default Color textHighlightColour() {
 		return Color.BLUE;
