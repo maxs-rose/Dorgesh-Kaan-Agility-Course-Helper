@@ -29,7 +29,6 @@ public final class MachinePartHighlighter {
 		if (!state.isOnCourse() || !state.hasItems())
 			return;
 		
-		log.debug("Interacting: {}", event.getId());
 		state.setLastObjectInteraction(event.getId());
 	}
 	
@@ -46,7 +45,7 @@ public final class MachinePartHighlighter {
 	}
 	
 	private void DialogOptions() {
-		var widget = client.getWidget(InterfaceID.CHATMENU, 1);
+		var widget = client.getWidget(InterfaceID.Chatmenu.OPTIONS);
 		
 		if (widget == null)
 			return;
