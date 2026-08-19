@@ -9,7 +9,6 @@ import net.runelite.api.gameval.InterfaceID;
 import net.runelite.api.widgets.Widget;
 import net.runelite.client.callback.ClientThread;
 import net.runelite.client.eventbus.Subscribe;
-import net.runelite.client.util.ColorUtil;
 import net.runelite.client.util.Text;
 import uk.zadoss.dorgesh.agility.models.GameObject;
 
@@ -79,7 +78,7 @@ public final class MachinePartHighlighter {
 	
 	private void highlightOption(Widget widget) {
 		var plainText = Text.removeTags(widget.getText());
-		var fomratted = String.format("(%s) %s", widget.getIndex(), plainText);
-		widget.setText(ColorUtil.wrapWithColorTag(fomratted, config.textHighlightColour()));
+		widget.setText(String.format("(%s) %s", widget.getIndex(), plainText));
+		widget.setTextColor(config.textHighlightColour().getRGB());
 	}
 }
