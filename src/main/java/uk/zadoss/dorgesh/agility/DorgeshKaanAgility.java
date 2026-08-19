@@ -40,7 +40,7 @@ public final class DorgeshKaanAgility extends Plugin {
 	@Inject
 	private BoilerOverlay boilerOverlay;
 	@Inject
-	private MachinePartHighlighter partHighlighter;
+	private WidgetHighlighter partHighlighter;
 	@Inject
 	private RequestWatcher requestWatcher;
 	

@@ -16,7 +16,7 @@ import javax.inject.Inject;
 
 @Slf4j
 @RequiredArgsConstructor(onConstructor_ = { @Inject })
-public final class MachinePartHighlighter {
+public final class WidgetHighlighter {
 	private final Client client;
 	private final DorgeshKaanAgilityConfig config;
 	private final ClientThread clientThread;
