@@ -81,6 +81,14 @@ public abstract class MachineOverlay extends Overlay {
 		if (gameObject.isEmpty())
 			return null;
 		
+		var player = client.getLocalPlayer();
+		
+		if (gameObject.get().getWorldLocation().getPlane() != player.getWorldLocation().getPlane())
+			return null;
+		
+		if (gameObject.get().getLocalLocation().distanceTo(player.getLocalLocation()) > 600)
+			return null;
+		
 		var item = getItem();
 		
 		if (item.isEmpty())

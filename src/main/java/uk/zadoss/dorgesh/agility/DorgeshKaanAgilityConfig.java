@@ -44,4 +44,13 @@ public interface DorgeshKaanAgilityConfig extends Config {
 	default Color componentColour() {
 		return Color.CYAN;
 	}
+	
+	@ConfigItem(
+			keyName = "textColour",
+			name = "Text Colour",
+			description = "Colour to highlight correct component text with"
+	)
+	default Color textHighlightColour() {
+		return Color.BLUE;
+	}
 }

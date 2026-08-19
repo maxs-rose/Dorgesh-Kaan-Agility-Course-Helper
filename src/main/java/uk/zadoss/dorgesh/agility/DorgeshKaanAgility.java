@@ -53,6 +53,9 @@ public final class DorgeshKaanAgility extends Plugin {
 		overlayManager.add(turgallOverlay);
 		overlayManager.add(consoleOverlay);
 		overlayManager.add(boilerOverlay);
+		
+		courseState.setCurrentRegion(-1);
+		courseState.reset();
 	}
 	
 	@Override

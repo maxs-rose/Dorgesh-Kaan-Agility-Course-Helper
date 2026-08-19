@@ -6,8 +6,11 @@ import net.runelite.api.Client;
 import net.runelite.api.events.MenuOptionClicked;
 import net.runelite.api.events.WidgetLoaded;
 import net.runelite.api.gameval.InterfaceID;
+import net.runelite.api.widgets.Widget;
 import net.runelite.client.callback.ClientThread;
 import net.runelite.client.eventbus.Subscribe;
+import net.runelite.client.util.ColorUtil;
+import net.runelite.client.util.Text;
 import uk.zadoss.dorgesh.agility.models.GameObject;
 
 import javax.inject.Inject;
@@ -23,7 +26,7 @@ public final class MachinePartHighlighter {
 	@Subscribe
 	@SuppressWarnings("unused")
 	public void onMenuOptionClicked(MenuOptionClicked event) {
-		if (!state.isOnCourse() || !state.hasItems() || !config.highlightComponent())
+		if (!state.isOnCourse() || !state.hasItems())
 			return;
 		
 		log.debug("Interacting: {}", event.getId());
@@ -33,7 +36,7 @@ public final class MachinePartHighlighter {
 	@Subscribe
 	@SuppressWarnings("unused")
 	public void onWidgetLoaded(WidgetLoaded event) {
-		if (!state.isOnCourse() || !state.hasItems() || !config.highlightComponent())
+		if (!state.isOnCourse() || !state.hasItems())
 			return;
 		
 		if (event.getGroupId() != InterfaceID.CHATMENU)
@@ -60,7 +63,7 @@ public final class MachinePartHighlighter {
 				if (child.getIndex() != i.getIndex())
 					return;
 				
-				child.setTextColor(config.componentColour().getRGB());
+				highlightOption(child);
 			});
 			
 			state.getDelicateItem().ifPresent(i -> {
@@ -70,8 +73,14 @@ public final class MachinePartHighlighter {
 				if (child.getIndex() != i.getIndex())
 					return;
 				
-				child.setTextColor(config.componentColour().getRGB());
+				highlightOption(child);
 			});
 		}
+	}
+	
+	private void highlightOption(Widget widget) {
+		var plainText = Text.removeTags(widget.getText());
+		var fomratted = String.format("(%s) %s", widget.getIndex(), plainText);
+		widget.setText(ColorUtil.wrapWithColorTag(fomratted, config.textHighlightColour()));
 	}
 }
