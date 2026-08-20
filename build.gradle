@@ -1,6 +1,5 @@
 plugins {
     id 'java'
-    id("io.freefair.lombok") version "9.5.0"
 }
 
 repositories {
@@ -20,12 +19,15 @@ def pluginMainClass = 'uk.zadoss.dorgesh.agility.DorgeshKaanAgilityTest'
 dependencies {
     compileOnly group: 'net.runelite', name: 'client', version: runeLiteVersion
 
+    compileOnly 'org.projectlombok:lombok:1.18.30'
+    annotationProcessor 'org.projectlombok:lombok:1.18.30'
+
     testImplementation 'junit:junit:4.12'
     testImplementation group: 'net.runelite', name: 'client', version: runeLiteVersion
     testImplementation group: 'net.runelite', name: 'jshell', version: runeLiteVersion
 }
 
-group = 'uk.co.zadoss.dorgesh.agility'
+group = 'uk.zadoss.dorgesh.agility'
 
 tasks.withType(JavaCompile).configureEach {
     options.encoding = 'UTF-8'
@@ -37,7 +39,7 @@ tasks.register('run', JavaExec) {
     mainClass = pluginMainClass
 
     jvmArgs "-ea"
-    args "--developer-mode", "--debug"
+    args "--developer-mode"
 }
 
 tasks.register('shadowJar', Jar) {

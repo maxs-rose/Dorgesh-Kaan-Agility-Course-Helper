@@ -40,7 +40,8 @@ public final class WidgetHighlighter {
 		if (event.getGroupId() != InterfaceID.CHATMENU)
 			return;
 		
-		clientThread.invokeLater(this::DialogOptions);
+		if (state.getLastObjectInteraction() == GameObject.Boiler.getId() || state.getLastObjectInteraction() == GameObject.Console.getId())
+			clientThread.invokeLater(this::DialogOptions);
 	}
 	
 	private void DialogOptions() {

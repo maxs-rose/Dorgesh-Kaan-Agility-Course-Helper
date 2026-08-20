@@ -41,7 +41,7 @@ public final class RequestWatcher {
 		var heavy = client.getVarbitValue(VarbitID.DORGESH_AGILITY_PART_HEAVY);
 		var delicate = client.getVarbitValue(VarbitID.DORGESH_AGILITY_PART_DELICATE);
 		
-		log.debug("Item update requested - Heavy: {}, Delicate: {}", heavy, delicate);
+		log.info("Items requested - Heavy: {} | Delicate: {}", heavy, delicate);
 		
 		if (isNotSet(heavy) || isNotSet(delicate)) {
 			state.resetItems();

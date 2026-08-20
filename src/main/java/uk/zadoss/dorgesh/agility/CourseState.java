@@ -55,6 +55,6 @@ public final class CourseState {
 		this.delicateItem = Optional.of(delicateItem);
 		lastObjectInteraction = -1;
 		
-		log.debug("Items set - Heavy: {} | Delicate: {}", heavyItem, delicateItem);
+		log.info("Items set - Heavy: {} | Delicate: {}", heavyItem, delicateItem);
 	}
 }
