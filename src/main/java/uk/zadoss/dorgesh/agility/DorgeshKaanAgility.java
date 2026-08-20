@@ -14,6 +14,7 @@ import uk.zadoss.dorgesh.agility.events.CourseEntered;
 import uk.zadoss.dorgesh.agility.events.CourseExit;
 import uk.zadoss.dorgesh.agility.overlays.BoilerOverlay;
 import uk.zadoss.dorgesh.agility.overlays.ConsoleOverlay;
+import uk.zadoss.dorgesh.agility.overlays.ItemHud;
 import uk.zadoss.dorgesh.agility.overlays.TurgallOverlay;
 
 import javax.inject.Inject;
@@ -44,6 +45,9 @@ public final class DorgeshKaanAgility extends Plugin {
 	@Inject
 	private RequestWatcher requestWatcher;
 	
+	@Inject
+	private ItemHud itemHud;
+	
 	@Override
 	protected void startUp() {
 		eventBus.register(consoleOverlay);
@@ -51,6 +55,7 @@ public final class DorgeshKaanAgility extends Plugin {
 		eventBus.register(partHighlighter);
 		eventBus.register(requestWatcher);
 		eventBus.register(turgallOverlay);
+		eventBus.register(itemHud);
 		overlayManager.add(turgallOverlay);
 		overlayManager.add(consoleOverlay);
 		overlayManager.add(boilerOverlay);
@@ -69,7 +74,9 @@ public final class DorgeshKaanAgility extends Plugin {
 		eventBus.unregister(consoleOverlay);
 		eventBus.unregister(boilerOverlay);
 		eventBus.unregister(partHighlighter);
+		eventBus.unregister(itemHud);
 		
+		itemHud.hideItems();
 		courseState.reset();
 	}
 	

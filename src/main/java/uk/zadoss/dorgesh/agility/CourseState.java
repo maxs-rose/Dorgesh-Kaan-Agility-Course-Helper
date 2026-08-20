@@ -2,18 +2,25 @@ package uk.zadoss.dorgesh.agility;
 
 import lombok.Getter;
 import lombok.NonNull;
+import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
+import net.runelite.client.eventbus.EventBus;
+import uk.zadoss.dorgesh.agility.events.RequestItemChanged;
 import uk.zadoss.dorgesh.agility.models.Item;
 
+import javax.inject.Inject;
 import javax.inject.Singleton;
 
 import java.util.Optional;
 
 @Slf4j
 @Singleton
+@RequiredArgsConstructor(onConstructor_ = { @Inject })
 public final class CourseState {
 	private static final int REGION_ID = 10833;
+	
+	private final EventBus eventBus;
 	
 	@Getter @Setter
 	private int currentRegion;
@@ -48,6 +55,7 @@ public final class CourseState {
 		lastObjectInteraction = -1;
 		
 		log.debug("Items reset");
+		eventBus.post(new RequestItemChanged());
 	}
 	
 	public void setItems(Item heavyItem, Item delicateItem) {
@@ -56,5 +64,6 @@ public final class CourseState {
 		lastObjectInteraction = -1;
 		
 		log.info("Items set - Heavy: {} | Delicate: {}", heavyItem, delicateItem);
+		eventBus.post(new RequestItemChanged());
 	}
 }

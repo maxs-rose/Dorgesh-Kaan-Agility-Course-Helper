@@ -6,8 +6,10 @@ import net.runelite.client.config.ConfigItem;
 
 import java.awt.*;
 
-@ConfigGroup("dorgeshkaanagilityhelper")
+@ConfigGroup(DorgeshKaanAgilityConfig.CONFIG_GROUP)
 public interface DorgeshKaanAgilityConfig extends Config {
+	public final String CONFIG_GROUP = "dorgeshkaanagilityhelper";
+	
 	
 	@ConfigItem(
 			keyName = "highlightTurgall",
@@ -57,5 +59,15 @@ public interface DorgeshKaanAgilityConfig extends Config {
 	)
 	default Color textHighlightColour() {
 		return Color.BLUE;
+	}
+	
+	@ConfigItem(
+			keyName = "showHud",
+			name = "Component HUD",
+			description = "Show requested components as HUD element",
+			position = 5
+	)
+	default boolean showHud() {
+		return true;
 	}
 }
