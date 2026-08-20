@@ -1,7 +1,6 @@
 package uk.zadoss.dorgesh.agility.overlays;
 
 import lombok.extern.slf4j.Slf4j;
-import net.runelite.api.Client;
 import net.runelite.api.NPC;
 import net.runelite.api.events.NpcDespawned;
 import net.runelite.api.events.NpcSpawned;
@@ -21,15 +20,13 @@ import java.util.Optional;
 
 @Slf4j
 public final class TurgallOverlay extends Overlay {
-	private final Client client;
 	private final DorgeshKaanAgilityConfig config;
 	private final CourseState state;
 	
 	private Optional<NPC> turgall;
 	
 	@Inject
-	public TurgallOverlay(Client client, DorgeshKaanAgilityConfig config, CourseState state) {
-		this.client = client;
+	public TurgallOverlay(DorgeshKaanAgilityConfig config, CourseState state) {
 		this.config = config;
 		this.state = state;
 		turgall = Optional.empty();
