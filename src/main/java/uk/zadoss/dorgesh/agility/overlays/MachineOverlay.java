@@ -112,7 +112,7 @@ public abstract class MachineOverlay extends Overlay {
 		return null;
 	}
 	
-	private final AsyncBufferedImage itemImage(Item item) {
+	private AsyncBufferedImage itemImage(Item item) {
 		return itemManager.getImage(item.getItemId());
 	}
 }

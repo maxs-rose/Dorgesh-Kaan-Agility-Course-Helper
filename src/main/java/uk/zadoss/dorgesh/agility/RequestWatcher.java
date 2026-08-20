@@ -1,6 +1,5 @@
 package uk.zadoss.dorgesh.agility;
 
-import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import net.runelite.api.Client;
@@ -9,6 +8,7 @@ import net.runelite.api.gameval.VarbitID;
 import net.runelite.client.eventbus.Subscribe;
 import uk.zadoss.dorgesh.agility.events.CourseEntered;
 import uk.zadoss.dorgesh.agility.models.Item;
+import uk.zadoss.dorgesh.agility.models.Item.ItemCategory;
 
 import javax.inject.Inject;
 
@@ -48,36 +48,13 @@ public final class RequestWatcher {
 			return;
 		}
 		
-		state.setItems(toHeavyItem(heavy), toDelicateItem(delicate));
+		state.setItems(
+				Item.fromVarBit(ItemCategory.Heavy, heavy),
+				Item.fromVarBit(ItemCategory.Delicate, delicate)
+		);
 	}
 	
 	private boolean isNotSet(int value) {
 		return value == 0 || value > 3;
-	}
-	
-	private @NonNull Item toHeavyItem(int value) {
-		switch (value) {
-			case 1:
-				return Item.Cog;
-			case 2:
-				return Item.Powerbox;
-			case 3:
-				return Item.Lever;
-		}
-		
-		throw new IndexOutOfBoundsException("Value " + value + " is not a valid component index");
-	}
-	
-	private @NonNull Item toDelicateItem(int value) {
-		switch (value) {
-			case 1:
-				return Item.Fuse;
-			case 2:
-				return Item.Meter;
-			case 3:
-				return Item.Capacitor;
-		}
-		
-		throw new IndexOutOfBoundsException("Value " + value + " is not a valid component index");
 	}
 }
