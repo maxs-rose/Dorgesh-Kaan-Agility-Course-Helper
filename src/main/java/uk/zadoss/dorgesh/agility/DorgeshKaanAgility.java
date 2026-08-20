@@ -83,8 +83,13 @@ public final class DorgeshKaanAgility extends Plugin {
 	@Subscribe
 	@SuppressWarnings("unused")
 	public void onGameTick(GameTick tick) {
+		var player = client.getLocalPlayer();
+		
+		if (player == null)
+			return;
+		
 		var previousRegion = courseState.getCurrentRegion();
-		courseState.setCurrentRegion(client.getLocalPlayer().getWorldLocation().getRegionID());
+		courseState.setCurrentRegion(player.getWorldLocation().getRegionID());
 		
 		if (previousRegion == courseState.getCurrentRegion())
 			return;
