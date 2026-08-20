@@ -26,9 +26,6 @@ public final class CourseState {
 	private int currentRegion;
 	
 	@Getter @Setter
-	private boolean hasSpanner;
-	
-	@Getter @Setter
 	private int lastObjectInteraction = -1;
 	
 	@Getter @NonNull
@@ -45,7 +42,6 @@ public final class CourseState {
 	}
 	
 	public void reset() {
-		hasSpanner = false;
 		resetItems();
 	}
 	
