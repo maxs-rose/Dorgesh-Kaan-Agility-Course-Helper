@@ -18,5 +18,5 @@ public enum Item {
 	Meter(ItemID.DORGESH_POWERSTATION_METER, 3);
 	
 	private final int itemId;
-	private final int index;
+	private final int dialogOption;
 }

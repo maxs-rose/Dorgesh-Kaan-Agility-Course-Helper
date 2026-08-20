@@ -59,7 +59,7 @@ public final class WidgetHighlighter {
 				if (lastInteract != GameObject.Boiler.getId())
 					return;
 				
-				if (child.getIndex() != i.getIndex())
+				if (child.getIndex() != i.getDialogOption())
 					return;
 				
 				highlightOption(child);
@@ -69,7 +69,7 @@ public final class WidgetHighlighter {
 				if (lastInteract != GameObject.Console.getId())
 					return;
 				
-				if (child.getIndex() != i.getIndex())
+				if (child.getIndex() != i.getDialogOption())
 					return;
 				
 				highlightOption(child);
