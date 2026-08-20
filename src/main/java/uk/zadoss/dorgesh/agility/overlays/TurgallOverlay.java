@@ -25,7 +25,7 @@ public final class TurgallOverlay extends Overlay {
 	private final DorgeshKaanAgilityConfig config;
 	private final CourseState state;
 	
-	private Optional<NPC> turgall = Optional.empty();
+	private Optional<NPC> turgall;
 	
 	@Inject
 	public TurgallOverlay(Client client, DorgeshKaanAgilityConfig config, CourseState state) {
@@ -34,7 +34,7 @@ public final class TurgallOverlay extends Overlay {
 		this.state = state;
 		turgall = Optional.empty();
 		
-		setLayer(OverlayLayer.ALWAYS_ON_TOP);
+		setLayer(OverlayLayer.ABOVE_SCENE);
 		setPosition(OverlayPosition.DYNAMIC);
 	}
 	
